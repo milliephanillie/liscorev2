@@ -71,19 +71,26 @@ const SpecificationEl = (props) => {
     <div className="mt-30">
       {product && product.groups && product.groups.groups && product.groups.groups.length > 0 && map(product.groups.groups, (group, index) => {
         let count = 0;
+        let groups = {
+          'concrete-equipment-year': 'general-details',
+          'concrete-equipment-make': 'general-details',
+          'concrete-equipment-model': 'general-details',
+          'concrete-equipment-condition': 'general-details',
+        };
+
         return Object.keys(usedTaxonomies).includes(group.slug) && (
           <div id={group.slug} key={group.slug} className="mt-20 sm:mt-48 group--wrapper">
             <h5
               className="mb-20 font-bold text-grey-1000">{group.slug === '' ? lc_data.jts[505] : group.name}</h5>
             <div className="flex flex-wrap justify-between">
-              {map(product.groups.fields, (taxonomyGroup, taxonomy) => {
+              {map(groups, (taxonomyGroup, taxonomy) => {
                 const tax = get(product.taxonomies, taxonomy);
                 const prefix = get(product.taxonomy_options, [taxonomy, 'prefix']);
                 const suffix = get(product.taxonomy_options, [taxonomy, 'suffix']);
                 const elClasses = cx({
                   'flex justify-between px-10 py-10 sm:mt-0': tax,
-                  'w-full sm:w-48% single-value': tax && tax.type !== 'checkbox',
-                  'bg-grey-100 single-value-full': tax && tax.type !== 'checkbox' && ((!smallScreen && colored.includes(count)) || (smallScreen && count % 2 === 0)),
+                  'w-full sm:w-100% single-value': tax && tax.type !== 'checkbox',
+                  'bg-grey-100 single-value-full': tax && tax.type !== 'checkbox' && (count % 2 === 0),
                   'flex-col -mx-8 px-0 w-full multiple-value': tax && tax.type === 'checkbox',
                 });
                 if (group.slug === taxonomyGroup && !otherTaxonomies.includes(taxonomy)) {

@@ -8,6 +8,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { sprintf, __ } from '@wordpress/i18n';
 import ReactSVG from 'react-svg';
 import homeIcon from '../../../../../../images/icons/home.svg';
+import he from 'he';
 
 /**
  * Internal dependencies
@@ -31,21 +32,21 @@ function Breadcrumb(props) {
           {product?.product_meta.category &&
               <li className="flex items-center px-2">
                 <span className="mr-4">/</span>
-                <a href={`${lc_data.site_url}` + '/ad-category/' + `${product.product_meta.category}`} className="text-grey-900">Concrete Equipment</a>
+                <a href={`${lc_data.site_url}` + 'ad-category/' + `${product.product_meta.category}`} className="text-grey-900">Concrete Equipment</a>
               </li>
 
           }
           {product?.taxonomies['concrete-equipment-type'] &&
               <li className="flex items-center px-2">
                 <span className="mr-4">/</span>
-                <a href={'/ad-category/' + `${product.product_meta.category}` + '/?&tax%5Bconcrete-equipment-type%5D=' + `${product.taxonomies['concrete-equipment-type'].term_slug}`} className="text-grey-900">{product.taxonomies['concrete-equipment-type'].term}</a>
+                <a href={'/ad-category/' + `${product.product_meta.category}` + '/?&tax%5Bconcrete-equipment-type%5D=' + `${product.taxonomies['concrete-equipment-type'].term_slug}`} className="text-grey-900">{he.decode(product.taxonomies['concrete-equipment-type'].term)}</a>
               </li>
 
           }
           {product?.taxonomies['concrete-equipment-subcategory'] &&
               <li className="flex items-center px-2">
                 <span className="mr-4">/</span>
-                <a href={'/ad-category/' + `${product.product_meta.category}` + '/?tax%5Bconcrete-equipment-subcategory%5D=' + `${product.taxonomies['concrete-equipment-subcategory'].term_slug}` + '&tax%5Bconcrete-equipment-type%5D=' + `${product.taxonomies['concrete-equipment-type'].term_slug}`} className="text-grey-900">{product.taxonomies['concrete-equipment-subcategory'].term}</a>
+                <a href={'/ad-category/' + `${product.product_meta.category}` + '/?tax%5Bconcrete-equipment-subcategory%5D=' + `${product.taxonomies['concrete-equipment-subcategory'].term_slug}` + '&tax%5Bconcrete-equipment-type%5D=' + `${product.taxonomies['concrete-equipment-type'].term_slug}`} className="text-grey-900">{he.decode(product.taxonomies['concrete-equipment-subcategory'].term)}</a>
               </li>
 
           }

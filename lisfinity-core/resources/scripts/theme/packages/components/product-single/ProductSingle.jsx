@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import ProductSidebarAlt from './partials/content/ProductSidebarAlt';
 import ModalNew from '../modal/ModalNew';
 import React from 'react';
+import OwnerAlt from "./partials/sidebar/OwnerAlt";
 
 /**
  * Internal dependencies
@@ -164,6 +165,12 @@ class ProductSingle extends Component {
                                       <ProductContent product={product} currentUser={currentUser} options={this.state.options}/>
                                   }
                                 </div>
+                                {showSidebar === 'default' &&
+                                    <aside className="product--single-aside w-full bg:pl-30 bg:w-2/6">
+                                      {this.state.options &&
+                                          <ProductSidebarAlt product={product} currentUser={currentUser} options={this.state.options}/>}
+                                    </aside>
+                                }
                               </Fragment>
                           }
 
@@ -211,7 +218,9 @@ class ProductSingle extends Component {
                                   }
 
                                   {this.state.options &&
-                                      <ProductContent product={product} currentUser={currentUser} options={this.state.options}/>
+                                      <div>
+                                        <ProductContent product={product} currentUser={currentUser} options={this.state.options}/>
+                                      </div>
                                   }
                                 </div>
                                 {showSidebar === 'default' &&

@@ -56,11 +56,11 @@ function ProductContent(props) {
 
       <section className="product--section product--section__meta flex flex-wrap mb-20 justify-between items-center">
         {product?.is_expired &&
-            <div className="updated-expired relative container px-20 py-86"><span
-                className="py-10 px-20 rounded border border-red-300 bg-red-100 text-xl text-red-500">{lc_data.jst[711]}</span>
+            <div className="updated-expired relative container px-20 py-86 new-orange-wrapper"><span
+                className="new-orange py-10 px-20 rounded border border-red-300 bg-red-100 text-xl text-red-500">{lc_data.jst[711]}</span>
             </div>
         }
-        <div className="flex">
+        <div className="product---header-custom flex">
           <div className="leading-snug"><h1 className="-mb-10 font-bold text-5xl text-grey-1000 leading-snug"
                                             dangerouslySetInnerHTML={{ __html: he.decode(product.post_title) }}/></div>
 
@@ -68,8 +68,7 @@ function ProductContent(props) {
           {/*{props?.options?.published_date && props?.options?.published_date !== '' &&*/}
           {/*<div*/}
           {/*  className="product--date text-grey-1000 mt-10 ml-10 text-13 font-light ">{sprintf(lc_data.jst[728], props?.options?.published_date)}</div>*/}
-          }
-          {!props.premiumOnly &&
+          {!props.premiumOnly && !product?.is_expired &&
               <div className="product--info">
                 <ProductPrice product={product} currentUser={currentUser} options={props.options}/>
               </div>
@@ -137,11 +136,14 @@ function ProductContent(props) {
       <Files files={product.files}/>
       }
 
+      <div className="flex">
+
       <div className="product--id text-grey-1000 text-13 font-light">{sprintf(lc_data.jst[504], product.ID)}</div>
       {props?.options?.published_date && props?.options?.published_date !== '' &&
           <div
               className="product--date text-grey-1000 mt-10 ml-10 text-13 font-light ">{sprintf(lc_data.jst[728], props?.options?.published_date)}</div>
       }
+      </div>
 
     </div>
   );

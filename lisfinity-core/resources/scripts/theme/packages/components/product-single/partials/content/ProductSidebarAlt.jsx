@@ -12,9 +12,11 @@ function ProductSidebarAlt(props) {
   const { product, currentUser, options } = props;
   return (
     <Fragment>
-      <div className="profile p-20 bg-white rounded shadow-theme">
-        <OwnerAlt product={product} currentUser={currentUser} options={props.options}/>
-      </div>
+        {!product?.is_expired &&
+            <div className="profile p-20 bg-white rounded shadow-theme">
+                <OwnerAlt product={product} currentUser={currentUser} options={props.options}/>
+            </div>
+        }
 
       {options.calculator_position !== 'content' && product.product_meta.price > 0 && product.calculator && product.calculator.display &&
       <div className="profile--calculator mt-30 py-20 px-20 bg-white rounded shadow-theme">
